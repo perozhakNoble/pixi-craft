@@ -87,15 +87,7 @@ class Modal extends React.Component {
       ];
     }
 
-    // return options;
-    return [
-        {
-          value: 'single',
-          description: 'single',
-          labelFor: 'single',
-          id: 3
-        }
-    ]
+    return options;
   }
 
   constructor(props) {

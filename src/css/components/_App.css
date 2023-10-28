@@ -47,9 +47,9 @@
     lost-utility: clearfix;
     margin: 1em 0;
 
-    /* > div {
+    > div {
       lost-column: 1/2 0 0.5em;
-    } */
+    }
 
     .app__toggle-help-button {
       @mixin button darkblue;

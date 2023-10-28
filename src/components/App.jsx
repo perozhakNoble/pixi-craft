@@ -1,6 +1,4 @@
 import React from 'react';
-import CookieConsent from 'react-cookie-consent';
-import { Link } from 'react-router-dom';
 import PreviewBox from './PreviewBox';
 import PixelCanvasContainer from './PixelCanvas';
 import CellSizeContainer from './CellSize';
@@ -8,7 +6,6 @@ import ColorPickerContainer from './ColorPicker';
 import ModalContainer from './Modal';
 import DimensionsContainer from './Dimensions';
 import KeyBindings from './KeyBindings';
-import CssDisplayContainer from './CssDisplay';
 import DurationContainer from './Duration';
 import EraserContainer from './Eraser';
 import BucketContainer from './Bucket';
@@ -75,11 +72,44 @@ export default class App extends React.Component {
           fadeOutTime={1500}
           duration={1500}
         />
+        <div
+          className="app__frames-container"
+          data-tooltip={
+            helpOn
+              ? `Create an awesome animation sequence.
+              You can modify the duration of each frame, changing its own value.
+              The number indicates where the frame ends in a range from 0 to 100.
+              `
+              : null
+          }
+        >
+          <FramesHandlerContainer />
+        </div>
         <div className="app__central-container">
           <div className="left col-1-4">
             <div className="app__left-side">
               <div className="app__mobile--container max-width-container">
                 <div className="app__mobile--group">
+                  <div data-tooltip={helpOn ? 'New project' : null}>
+                    <NewProjectContainer />
+                  </div>
+                  <div className="app__load-save-container">
+                    <button
+                      type="button"
+                      className="app__load-button"
+                      onClick={() => {
+                        this.changeModalType('load');
+                      }}
+                      data-tooltip={
+                        helpOn ? 'Load projects you stored before' : null
+                      }
+                    >
+                      LOAD
+                    </button>
+                    <div data-tooltip={helpOn ? 'Save your project' : null}>
+                      <SaveDrawingContainer />
+                    </div>
+                  </div>
                   <div
                     data-tooltip={helpOn ? 'Undo (CTRL+Z) Redo (CTRL+Y)' : null}
                   >
@@ -149,7 +179,7 @@ export default class App extends React.Component {
                       />
                     </div>
                     <div className="app__help-container">
-                      {/* <div data-tooltip="Toggle help tooltips">
+                      <div data-tooltip="Toggle help tooltips">
                         <button
                           type="button"
                           aria-label="Help"
@@ -159,7 +189,7 @@ export default class App extends React.Component {
                             this.toggleHelp();
                           }}
                         />
-                      </div> */}
+                      </div>
                       <div
                         data-tooltip={helpOn ? 'Show keyboard shortcuts' : null}
                       >
@@ -184,6 +214,12 @@ export default class App extends React.Component {
             <div className="app__right-side">
               <div className="app__mobile--container">
                 <div className="app__mobile--group">
+                  <PreviewBox
+                    helpOn={helpOn}
+                    callback={() => {
+                      this.changeModalType('preview');
+                    }}
+                  />
                   <div
                     data-tooltip={helpOn ? 'Reset the selected frame' : null}
                     className="max-width-container-centered {"
@@ -214,31 +250,6 @@ export default class App extends React.Component {
             </div>
           </div>
         </div>
-        {/* <div className="css-container">
-          <CssDisplayContainer />
-        </div> */}
-        {/* <CookieConsent
-          location="bottom"
-          buttonText="Got it!"
-          cookieName="pixelartcssCookiesAccepted"
-          style={{
-            background: '#313131',
-            fontSize: '13px',
-            textAlign: 'center'
-          }}
-          buttonStyle={{
-            background: '#bbbbbb',
-            color: '#4e503b',
-            fontSize: '13px'
-          }}
-          contentStyle={{
-            flex: '1 0 200px',
-            margin: '15px'
-          }}
-          expires={150}
-        >
-          By continuing to use this website you are giving nulp team best mark. Thank you.
-        </CookieConsent> */}
         <ModalContainer
           type={modalType}
           isOpen={modalOpen}
