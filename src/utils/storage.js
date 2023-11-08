@@ -1,4 +1,6 @@
 import { exampleCat } from '../../examples/import-export/json-cat';
+import { exampleTank, exampleRidingTank } from '../../examples/import-export/json-tank';
+import { exampleF16} from '../../examples/import-export/json-f16';
 
 const STORAGE_KEY = 'pixelart-react-v3-0-0';
 
@@ -32,7 +34,7 @@ export function initStorage(storage) {
   storage.setItem(
     STORAGE_KEY,
     JSON.stringify({
-      stored: [exampleCat], // Load an example project data by default
+      stored: [exampleCat, exampleTank, exampleRidingTank, exampleF16], // Load an example project data by default
       current: 0
     })
   );
